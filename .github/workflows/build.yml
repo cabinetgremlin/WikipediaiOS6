@@ -15,18 +15,10 @@ jobs:
 
       - name: Setup Theos Toolchain
         uses: Randomblock1/theos-action@v1
-        with:
-          theos-sdks: 'https://github.com/theos/sdks'
 
-      - name: Download Legacy 32-bit SDK
+      - name: Fetch Hardware Device 9.3 SDK
         run: |
-          git clone --depth 1 https://github.com/hexedtext/sdks.git $THEOS/sdks/legacy_sdks || true
-          cp -r $THEOS/sdks/legacy_sdks/* $THEOS/sdks/ || true
-
-      - name: Patch Legacy SDK Module Maps
-        run: |
-          find $THEOS/sdks/ -name "module.map" -exec rename 's/module\.map$/module.modulemap/' {} + || true
-          find $THEOS/sdks/ -name "module.map" | while read f; do mv "$f" "${f%module.map}module.modulemap"; done || true
+          git clone --depth 1 https://github.com/theos/sdks.git $THEOS/sdks
 
       - name: Build Application Package
         run: |
