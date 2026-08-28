@@ -1,4 +1,4 @@
-TARGET = iphone:clang:latest:6.0
+TARGET = iphone:clang:9.3:6.0
 ARCHS = armv7
 
 include $(THEOS)/makefiles/common.mk
@@ -8,6 +8,5 @@ WikipediaiOS6_FILES = src/main.m $(wildcard src/*.m)
 WikipediaiOS6_FRAMEWORKS = UIKit Foundation CoreGraphics WebKit
 
 WikipediaiOS6_CFLAGS = -fno-modules -Wno-deprecated-module-dot-map -Wno-error
-WikipediaiOS6_LDFLAGS = -undefined dynamic_lookup
 
 include $(THEOS_MAKE_PATH)/application.mk
