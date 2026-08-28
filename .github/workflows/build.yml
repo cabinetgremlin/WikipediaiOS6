@@ -23,6 +23,11 @@ jobs:
           git clone --depth 1 https://github.com/hexedtext/sdks.git $THEOS/sdks/legacy_sdks || true
           cp -r $THEOS/sdks/legacy_sdks/* $THEOS/sdks/ || true
 
+      - name: Patch Legacy SDK Module Maps
+        run: |
+          find $THEOS/sdks/ -name "module.map" -exec rename 's/module\.map$/module.modulemap/' {} + || true
+          find $THEOS/sdks/ -name "module.map" | while read f; do mv "$f" "${f%module.map}module.modulemap"; done || true
+
       - name: Build Application Package
         run: |
           make package FINALPACKAGE=1
