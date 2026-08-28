@@ -1,0 +1,9 @@
+Package: com.cabinetgremlin.wikipediaios6
+Name: Wikipedia Classic
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Modern Wikipedia reader optimized for iOS 6.
+Maintainer: cabinetgremlin
+Author: cabinetgremlin
+Section: Applications
