@@ -16,11 +16,6 @@ jobs:
       - name: Setup Theos Toolchain
         uses: Randomblock1/theos-action@v1
 
-      - name: Fetch Hardware Device 9.3 SDK
-        run: |
-          rm -rf $THEOS/sdks
-          git clone --depth 1 https://github.com/theos/sdks.git $THEOS/sdks
-
       - name: Build Application Package
         run: |
           make package FINALPACKAGE=1
