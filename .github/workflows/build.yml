@@ -15,8 +15,23 @@ jobs:
 
       - name: Setup Theos Toolchain
         uses: Randomblock1/theos-action@v1
-        with:
-          theos-sdks: 'https://github.com/theos/sdks'
+
+      - name: Fetch SDK and Inject Missing Linker Stubs
+        run: |
+          rm -rf $THEOS/sdks
+          git clone --depth 1 https://github.com/theos/sdks.git $THEOS/sdks
+          mkdir -p $THEOS/sdks/iPhoneOS9.3.sdk/usr/lib/system
+          touch $THEOS/sdks/iPhoneOS9.3.sdk/usr/lib/system/liblaunch.dylib
+          cat << 'EOF' > $THEOS/sdks/iPhoneOS9.3.sdk/usr/lib/system/liblaunch.tbd
+          --- !tapi-tbd-v2
+          archs: [ armv7, armv7s, arm64 ]
+          platform: ios
+          install-name: /usr/lib/system/liblaunch.dylib
+          exports:
+            - archs: [ armv7, armv7s, arm64 ]
+              symbols: [ _launch_data_alloc ]
+          ...
+          EOF
 
       - name: Build Application Package
         run: |
