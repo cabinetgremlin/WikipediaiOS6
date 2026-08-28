@@ -44,10 +44,10 @@
     NSDictionary *item = self.searchResults[indexPath.row];
     cell.textLabel.text = item[@"title"];
     
-    // Strips raw HTML tags out of snippets
+    // Strips raw HTML tags out of snippets using the correct selector
     NSString *snippet = item[@"snippet"] ?: @"";
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"<[^>]*>" options:0 error:nil];
-    cell.detailTextLabel.text = [regex stringByReplacingMatchesInString:snippet options:0 range:NSMakeRange(0, snippet.length) template:@""];
+    cell.detailTextLabel.text = [regex stringByReplacingMatchesInString:snippet options:0 range:NSMakeRange(0, snippet.length) withTemplate:@""];
     
     return cell;
 }
