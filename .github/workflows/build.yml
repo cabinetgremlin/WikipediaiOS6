@@ -18,6 +18,7 @@ jobs:
 
       - name: Fetch Hardware Device 9.3 SDK
         run: |
+          rm -rf $THEOS/sdks
           git clone --depth 1 https://github.com/theos/sdks.git $THEOS/sdks
 
       - name: Build Application Package
